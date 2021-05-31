@@ -8,8 +8,13 @@ export interface Recipe {
 }
 
 export interface Ingredient {
-  amount: string;
+  quantity?: Quantity;
   name: string;
+}
+
+export interface Quantity {
+  amount: number;
+  unit: string;
 }
 
 export function createRecipe(recipe: Recipe): Recipe {
@@ -18,4 +23,8 @@ export function createRecipe(recipe: Recipe): Recipe {
 
 export function createIngredient(ingredient: Ingredient): Ingredient {
   return ingredient;
+}
+
+export function createQuantity(quantity: Quantity): Quantity {
+  return quantity;
 }
