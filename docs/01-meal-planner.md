@@ -103,3 +103,9 @@ describe(Shop.name, () => {
   });
 });
 ```
+
+## Check that a function throws
+
+```ts
+expect(() => myFunction()).toThrow('my error');
+```
