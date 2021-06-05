@@ -8,10 +8,11 @@ Here is an index of this repo's branches:
 
 | Branch                                                                                                           | Description                                                              |
 | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| [dom-distancing-0-main](https://github.com/marmicode/whiskmate/tree/dom-distancing-0-main)                       | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #0/3 |
-| [dom-distancing-1-testing](https://github.com/marmicode/whiskmate/tree/dom-distancing-1-testing)                 | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #1/3 |
-| [dom-distancing-2-date-input](https://github.com/marmicode/whiskmate/tree/dom-distancing-2-date-input)           | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #2/3 |
-| [dom-distancing-3-mat-date-picker](https://github.com/marmicode/whiskmate/tree/dom-distancing-3-mat-date-picker) | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #3/3 |
+| [dom-distancing-0-main](https://github.com/marmicode/whiskmate/tree/dom-distancing-0-main)                       | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #0/4 |
+| [dom-distancing-1-testing](https://github.com/marmicode/whiskmate/tree/dom-distancing-1-testing)                 | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #1/4 |
+| [dom-distancing-2-date-input](https://github.com/marmicode/whiskmate/tree/dom-distancing-2-date-input)           | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #2/4 |
+| [dom-distancing-3-mat-date-picker](https://github.com/marmicode/whiskmate/tree/dom-distancing-3-mat-date-picker) | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #3/4 |
+| [dom-distancing-4-easy-harness](https://github.com/marmicode/whiskmate/tree/dom-distancing-4-easy-harness)       | Keeping Tests Healthy with DOM Distancing Talk's Source Code - Step #4/4 |
 
 ---
 
