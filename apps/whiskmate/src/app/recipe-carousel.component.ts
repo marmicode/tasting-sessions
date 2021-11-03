@@ -12,6 +12,7 @@ import { RecipeRepository } from './recipe/recipe-repository.service';
       </wm-recipe-preview>
     </div>
     <div *ngIf="recipes">
+      <button mat-button color="warn" (click)="reset()">RESET</button>
       <button [disabled]="!hasPrevious()" mat-button (click)="previous()">
         PREVIOUS
       </button>
@@ -48,6 +49,10 @@ export class RecipeCarouselComponent implements OnInit {
 
   previous() {
     this.recipeIndex--;
+  }
+
+  reset() {
+    this.recipeIndex = 0;
   }
 
   getRecipe() {
