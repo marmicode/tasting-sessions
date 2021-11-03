@@ -64,6 +64,7 @@ export class RecipeCarouselComponent implements OnInit {
   }
 
   hasNext() {
+    console.count('compute hasNext...');
     return this.recipeIndex + 1 < (this.recipes?.length ?? 0);
   }
 }
