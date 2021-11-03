@@ -32,8 +32,7 @@ describe(scrapRecipeByUrl.name, () => {
             amount: 2,
             unit: 'unit',
           },
-          name:
-            'large leeks (or 4 smaller), trimmed and cut into ½ cm slices (530g)',
+          name: 'large leeks (or 4 smaller), trimmed and cut into ½ cm slices (530g)',
         },
         {
           quantity: {
@@ -47,8 +46,7 @@ describe(scrapRecipeByUrl.name, () => {
             amount: 2,
             unit: 'unit',
           },
-          name:
-            'small preserved lemons, pips discarded, skin and flesh finely chopped (30g)',
+          name: 'small preserved lemons, pips discarded, skin and flesh finely chopped (30g)',
         },
         {
           quantity: {
