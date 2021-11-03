@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of, delay } from 'rxjs';
+import { of, delay, defer } from 'rxjs';
 import { createRecipe } from './recipe';
 
 @Injectable({
@@ -536,6 +536,9 @@ export class RecipeRepository {
   ];
 
   getRecipes() {
-    return of(this._recipes).pipe(delay(1000));
+    return defer(() => {
+      console.count(`fetching recipes...`);
+      return of(this._recipes).pipe(delay(1000));
+    });
   }
 }
