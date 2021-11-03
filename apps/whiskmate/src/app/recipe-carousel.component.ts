@@ -67,7 +67,10 @@ export class RecipeCarouselComponent implements OnDestroy {
   );
   hasPrevious$ = this.recipeIndex$.pipe(map((index) => index > 0));
   hasNext$ = combineLatest([this.recipes$, this.recipeIndex$]).pipe(
-    map(([recipes, index]) => index + 1 < recipes.length)
+    map(([recipes, index]) => {
+      console.count('compute hasNext...');
+      return index + 1 < recipes.length;
+    })
   );
 
   constructor(private _recipeRepository: RecipeRepository) {}
