@@ -3021,6 +3021,13 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
+"@rx-angular/state@^1.4.6":
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/@rx-angular/state/-/state-1.4.6.tgz#a32cc064fc50ba6f7fa613b5be1cfba57300f375"
+  integrity sha512-ylXJbk5Q3SMnDSOxiRNin+2XgobKq/8tk33PaitQPeHC8oSqx/yPpySzw9b2DBmJMjaDSFgGov30RwuwfPCY3A==
+  dependencies:
+    tslib "^2.0.0"
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.1.tgz#a21117b19ee9be70c379ec1877537ef2e1c63301"

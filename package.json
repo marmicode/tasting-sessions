@@ -41,6 +41,7 @@
     "@angular/platform-browser-dynamic": "12.2.12",
     "@angular/router": "12.2.12",
     "@nrwl/angular": "13.1.3",
+    "@rx-angular/state": "^1.4.6",
     "puppeteer": "^10.0.0",
     "rxjs": "^7.4.0",
     "tslib": "^2.0.0",

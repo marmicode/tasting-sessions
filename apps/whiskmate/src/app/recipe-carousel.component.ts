@@ -2,28 +2,31 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  NgModule,
-  OnDestroy,
+  NgModule
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { RxState, select, selectSlice } from '@rx-angular/state';
 import {
-  BehaviorSubject,
-  combineLatest,
-  map,
-  shareReplay,
-  Subject,
-  takeUntil,
+  map, switchMap, timer
 } from 'rxjs';
+import { Recipe } from './recipe/recipe';
 import { RecipePreviewModule } from './recipe/recipe-preview.component';
 import { RecipeRepository } from './recipe/recipe-repository.service';
+
+export interface State {
+  recipes: Recipe[];
+  recipeIndex: number;
+}
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-carousel',
-  template: `<div class="container">
+  template: `
+    <div class="container">
       <wm-recipe-preview *ngIf="recipe$ | async as recipe" [recipe]="recipe">
       </wm-recipe-preview>
     </div>
+
     <div *ngIf="recipes$ | async">
       <button mat-button color="warn" (click)="reset()">RESET</button>
       <button
@@ -40,7 +43,8 @@ import { RecipeRepository } from './recipe/recipe-repository.service';
       >
         NEXT
       </button>
-    </div> `,
+    </div>
+  `,
   styles: [
     `
       :host {
@@ -53,43 +57,53 @@ import { RecipeRepository } from './recipe/recipe-repository.service';
       }
     `,
   ],
+  providers: [RxState],
 })
-export class RecipeCarouselComponent implements OnDestroy {
-  destroyed$ = new Subject();
-
-  recipeIndex$ = new BehaviorSubject(0);
-  recipes$ = this._recipeRepository
-    .getRecipes()
-    .pipe(takeUntil(this.destroyed$), shareReplay(1));
-
-  recipe$ = combineLatest([this.recipes$, this.recipeIndex$]).pipe(
-    map(([recipes, index]) => recipes?.[index])
+export class RecipeCarouselComponent {
+  recipe$ = this._state.select(
+    selectSlice(['recipes', 'recipeIndex']),
+    map(({ recipes, recipeIndex }) => recipes?.[recipeIndex])
   );
-  hasPrevious$ = this.recipeIndex$.pipe(map((index) => index > 0));
-  hasNext$ = combineLatest([this.recipes$, this.recipeIndex$]).pipe(
-    map(([recipes, index]) => {
+
+  hasPrevious$ = this._state
+    .select('recipeIndex')
+    .pipe(select(map((index) => index > 0)));
+
+  hasNext$ = this._state.select(
+    selectSlice(['recipes', 'recipeIndex']),
+    map(({ recipes, recipeIndex }) => {
       console.count('compute hasNext...');
-      return index + 1 < recipes.length;
+      return recipeIndex + 1 < recipes.length;
     })
   );
 
-  constructor(private _recipeRepository: RecipeRepository) {}
+  recipes$ = this._state.select('recipes');
 
-  ngOnDestroy() {
-    this.destroyed$.next(undefined);
-    this.destroyed$.complete();
+  constructor(
+    private _recipeRepository: RecipeRepository,
+    private _state: RxState<State>
+  ) {
+    this._state.set({ recipeIndex: 0 });
+    this._state.connect(
+      'recipes',
+      timer(0, 1000).pipe(switchMap(() => this._recipeRepository.getRecipes()))
+    );
+    this._state.connect(
+      'recipes',
+      timer(0, 1000).pipe(switchMap(() => this._recipeRepository.getRecipes()))
+    );
   }
 
   next() {
-    this.recipeIndex$.next(this.recipeIndex$.value + 1);
+    this._state.set(({ recipeIndex }) => ({ recipeIndex: recipeIndex + 1 }));
   }
 
   previous() {
-    this.recipeIndex$.next(this.recipeIndex$.value - 1);
+    this._state.set(({ recipeIndex }) => ({ recipeIndex: recipeIndex - 1 }));
   }
 
   reset() {
-    this.recipeIndex$.next(0);
+    this._state.set({ recipeIndex: 0 });
   }
 }
 
