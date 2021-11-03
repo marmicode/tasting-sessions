@@ -1,14 +1,8 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  NgModule
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RxState, select, selectSlice } from '@rx-angular/state';
-import {
-  map, switchMap, timer
-} from 'rxjs';
+import { map, switchMap, timer } from 'rxjs';
 import { Recipe } from './recipe/recipe';
 import { RecipePreviewModule } from './recipe/recipe-preview.component';
 import { RecipeRepository } from './recipe/recipe-repository.service';
@@ -22,28 +16,37 @@ export interface State {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'wm-recipe-carousel',
   template: `
+    <!-- Top navigation buttons. -->
+    <ng-container *ngTemplateOutlet="navigation"></ng-container>
+
     <div class="container">
       <wm-recipe-preview *ngIf="recipe$ | async as recipe" [recipe]="recipe">
       </wm-recipe-preview>
     </div>
 
-    <div *ngIf="recipes$ | async">
-      <button mat-button color="warn" (click)="reset()">RESET</button>
-      <button
-        [disabled]="(hasPrevious$ | async) !== true"
-        mat-button
-        (click)="previous()"
-      >
-        PREVIOUS
-      </button>
-      <button
-        [disabled]="(hasNext$ | async) !== true"
-        mat-button
-        (click)="next()"
-      >
-        NEXT
-      </button>
-    </div>
+    <!-- Bottom navigation buttons. -->
+    <ng-container *ngTemplateOutlet="navigation"></ng-container>
+
+    <!-- Navigation actions template. -->
+    <ng-template #navigation>
+      <div *ngIf="recipes$ | async">
+        <button mat-button color="warn" (click)="reset()">RESET</button>
+        <button
+          [disabled]="(hasPrevious$ | async) !== true"
+          mat-button
+          (click)="previous()"
+        >
+          PREVIOUS
+        </button>
+        <button
+          [disabled]="(hasNext$ | async) !== true"
+          mat-button
+          (click)="next()"
+        >
+          NEXT
+        </button>
+      </div>
+    </ng-template>
   `,
   styles: [
     `
