@@ -7,17 +7,31 @@ import { RecipeRepository } from './recipe/recipe-repository.service';
 
 @Component({
   selector: 'wm-recipe-carousel',
-  template: `<div class="container">
+  template: `
+    <!-- Top navigation buttons. -->
+    <ng-container *ngTemplateOutlet="navigation"></ng-container>
+
+    <div class="container">
       <wm-recipe-preview *ngIf="getRecipe() as recipe" [recipe]="recipe">
       </wm-recipe-preview>
     </div>
-    <div *ngIf="recipes">
-      <button mat-button color="warn" (click)="reset()">RESET</button>
-      <button [disabled]="!hasPrevious()" mat-button (click)="previous()">
-        PREVIOUS
-      </button>
-      <button [disabled]="!hasNext()" mat-button (click)="next()">NEXT</button>
-    </div> `,
+
+    <!-- Bottom navigation buttons. -->
+    <ng-container *ngTemplateOutlet="navigation"></ng-container>
+
+    <!-- Navigation actions template. -->
+    <ng-template #navigation>
+      <div *ngIf="recipes">
+        <button mat-button color="warn" (click)="reset()">RESET</button>
+        <button [disabled]="!hasPrevious()" mat-button (click)="previous()">
+          PREVIOUS
+        </button>
+        <button [disabled]="!hasNext()" mat-button (click)="next()">
+          NEXT
+        </button>
+      </div>
+    </ng-template>
+  `,
   styles: [
     `
       :host {
