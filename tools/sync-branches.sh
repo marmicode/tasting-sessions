@@ -27,4 +27,5 @@ function cascade_changes() {
 }
 
 cascade_changes \
+  main \
   boilerplate
