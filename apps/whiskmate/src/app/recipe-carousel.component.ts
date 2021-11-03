@@ -25,6 +25,7 @@ import { RecipeRepository } from './recipe/recipe-repository.service';
       </wm-recipe-preview>
     </div>
     <div *ngIf="recipes$ | async">
+      <button mat-button color="warn" (click)="reset()">RESET</button>
       <button
         [disabled]="(hasPrevious$ | async) !== true"
         mat-button
@@ -82,6 +83,10 @@ export class RecipeCarouselComponent implements OnDestroy {
 
   previous() {
     this.recipeIndex$.next(this.recipeIndex$.value - 1);
+  }
+
+  reset() {
+    this.recipeIndex$.next(0);
   }
 }
 
