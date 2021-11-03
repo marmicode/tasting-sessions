@@ -87,14 +87,7 @@ export class RecipeCarouselComponent {
     private _state: RxState<State>
   ) {
     this._state.set({ recipeIndex: 0 });
-    this._state.connect(
-      'recipes',
-      timer(0, 1000).pipe(switchMap(() => this._recipeRepository.getRecipes()))
-    );
-    this._state.connect(
-      'recipes',
-      timer(0, 1000).pipe(switchMap(() => this._recipeRepository.getRecipes()))
-    );
+    this._state.connect('recipes', this._recipeRepository.getRecipes());
   }
 
   next() {
