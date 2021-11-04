@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RxState, select, selectSlice } from '@rx-angular/state';
-import { map, switchMap, timer } from 'rxjs';
+import { map } from 'rxjs';
 import { Recipe } from './recipe/recipe';
 import { RecipePreviewModule } from './recipe/recipe-preview.component';
 import { RecipeRepository } from './recipe/recipe-repository.service';
