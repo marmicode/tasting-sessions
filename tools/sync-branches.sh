@@ -28,4 +28,7 @@ function cascade_changes() {
 
 cascade_changes \
   main \
-  boilerplate
+  boilerplate \
+  rx-state-00-imperative \
+  rx-state-01-reactive \
+  rx-state-02-rx-state
