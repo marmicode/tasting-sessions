@@ -1,5 +1,6 @@
+import { Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit, OnDestroy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Recipe } from './recipe/recipe';
 import { RecipePreviewModule } from './recipe/recipe-preview.component';
@@ -45,7 +46,8 @@ import { RecipeRepository } from './recipe/recipe-repository.service';
     `,
   ],
 })
-export class RecipeCarouselComponent implements OnInit {
+export class RecipeCarouselComponent implements OnInit, OnDestroy {
+  destroyed$ = new Subject();
   recipeIndex = 0;
   recipes?: Recipe[];
 
@@ -54,7 +56,13 @@ export class RecipeCarouselComponent implements OnInit {
   ngOnInit() {
     this._recipeRepository
       .getRecipes()
+      .pipe(takeUntil(this.destroyed$))
       .subscribe((recipes) => (this.recipes = recipes));
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(undefined);
+    this.destroyed$.complete();
   }
 
   next() {
