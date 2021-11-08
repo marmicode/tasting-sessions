@@ -10,8 +10,8 @@ import {
   BehaviorSubject,
   combineLatest,
   map,
+  ReplaySubject,
   shareReplay,
-  Subject,
   takeUntil,
 } from 'rxjs';
 import { RecipePreviewModule } from './recipe/recipe-preview.component';
@@ -67,7 +67,7 @@ import { RecipeRepository } from './recipe/recipe-repository.service';
   ],
 })
 export class RecipeCarouselComponent implements OnDestroy {
-  destroyed$ = new Subject();
+  destroyed$ = new ReplaySubject(1);
 
   recipeIndex$ = new BehaviorSubject(0);
   recipes$ = this._recipeRepository
